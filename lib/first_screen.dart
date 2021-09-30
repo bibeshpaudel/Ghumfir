@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:http_parser/http_parser.dart';
+// import 'package:http_parser/http_parser.dart';
 
 class FirstScreen extends StatefulWidget {
   static const id = 'first_screen';
@@ -41,13 +42,14 @@ class _FirstScreenState extends State<FirstScreen> {
 
   void imageSelectU() async{
     final XFile? selectedImageU =
-    await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    await _picker.pickImage(source: ImageSource.gallery, imageQuality: 10);
     print(selectedImageU!.path.toString());
     //if(selectedImageU.path.isNotEmpty) {
       setState(() {
         usr = selectedImageU;
         userimage = File(selectedImageU.path);
         imageu = Image.file(File(selectedImageU.path));
+        print(userimage!.path);
         // String img64 = base64Encode(File(selectedImageU.path).readAsBytesSync());
         // imgu = img64;
         List<int> imageBytes = (File(selectedImageU.path)).readAsBytesSync();
@@ -59,7 +61,7 @@ class _FirstScreenState extends State<FirstScreen> {
 
   void imageSelectC() async{
     final XFile? selectedImageC =
-    await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    await _picker.pickImage(source: ImageSource.gallery, imageQuality: 10);
     print(selectedImageC!.path.toString());
     //if(selectedImageC.path.isNotEmpty) {
       setState(() {
@@ -75,39 +77,39 @@ class _FirstScreenState extends State<FirstScreen> {
     //}
   }
 
-  Dio dio = new Dio();
-  Future submitKYC() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var counter = prefs.getString('key') ?? 0;
-    var counter1 = prefs.getInt('pk') ?? 0;
-    FormData? formData = FormData.fromMap({
-      "user": counter1,
-      "mobile":mobile,
-      "dob": dob,
-      "gender": gender,
-      "father_name":father,
-      "mother_name":mother,
-      "current_location":taddress,
-      "permanent_location":paddress,
-      "education":education,
-      "occupation":occupation,
-      "citizenship_number":cnumber,
-      "citizenship_issue_district":iaddress,
-      "citizenship_issue_date": doi,
-      "citizenship_photo": await MultipartFile.fromFile(userimage!.path, filename: 'citizen',),
-      "pp_size": await MultipartFile.fromFile(docimage!.path,  filename: 'user'),
-    });
-    var response = await dio.patch('http://ghumfir002.pythonanywhere.com/api/kyc/$counter1/',
-    data: formData,
-      options: Options(
-        headers: <String, String>{
-          'Authorization': 'Token $counter',
-        },
-      ),
-    );
-    print(response.statusCode);
-    print(response.data);
-  }
+  // Dio dio = new Dio();
+  // Future submitKYC() async{
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var counter = prefs.getString('key') ?? 0;
+  //   var counter1 = prefs.getInt('pk') ?? 0;
+  //   FormData? formData = FormData.fromMap({
+  //     "user": counter1,
+  //     "mobile":mobile,
+  //     "dob": dob,
+  //     "gender": gender,
+  //     "father_name":father,
+  //     "mother_name":mother,
+  //     "current_location":taddress,
+  //     "permanent_location":paddress,
+  //     "education":education,
+  //     "occupation":occupation,
+  //     "citizenship_number":cnumber,
+  //     "citizenship_issue_district":iaddress,
+  //     "citizenship_issue_date": doi,
+  //     "citizenship_photo": await MultipartFile.fromFile(userimage!.path, filename: 'citizen',),
+  //     "pp_size": await MultipartFile.fromFile(docimage!.path,  filename: 'user'),
+  //   });
+  //   var response = await dio.patch('http://ghumfir002.pythonanywhere.com/api/kyc/$counter1/',
+  //   data: formData,
+  //     options: Options(
+  //       headers: <String, String>{
+  //         'Authorization': 'Token $counter',
+  //       },
+  //     ),
+  //   );
+  //   print(response.statusCode);
+  //   print(response.data);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -395,7 +397,8 @@ class _FirstScreenState extends State<FirstScreen> {
                       width: 200.0,
                       child: ElevatedButton(onPressed: () {
                         setState(() {
-                          submitKYC();
+                          // submitKYC();
+                          postKYC();
                         });
                       },
                         child: Text('Submit', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
@@ -416,5 +419,52 @@ class _FirstScreenState extends State<FirstScreen> {
         ),
         ),
     );
+  }
+
+  Future postKYC() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var counter = prefs.getString('key') ?? 0;
+     var counter1 = prefs.getInt('pk') ?? 0;
+    var request = http.MultipartRequest(
+      'POST', Uri.parse("http://ghumfir002.pythonanywhere.com/api/kyc/"),
+
+    );
+    Map<String,String> headers={
+      "Authorization":"Token $counter",
+      "Content-type": "multipart/form-data"
+    };
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'citizenship_photo',
+        docimage!.path,
+      ),
+    );
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'pp_size',
+        userimage!.path
+      ),
+    );
+    request.headers.addAll(headers);
+    request.fields.addAll({
+          "user": counter1.toString(),
+          "mobile":mobile.text,
+          "dob": dob.text,
+          "gender": gender,
+          "father_name":father.text,
+          "mother_name":mother.text,
+          "current_location":taddress.text,
+          "permanent_location":paddress.text,
+          "education":education,
+          "occupation":occupation.text,
+          "citizenship_number":cnumber.text,
+          "citizenship_issue_district":iaddress.text,
+          "citizenship_issue_date": doi.text,
+    });
+    print("request: "+request.toString());
+    var response = await request.send();
+    print("This is response:"+response.toString());
+    print(response.statusCode);
+    return response.statusCode;
   }
 }

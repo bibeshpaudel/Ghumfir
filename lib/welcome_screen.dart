@@ -6,7 +6,6 @@ import 'package:ghumfir/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:ghumfir/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const id = 'welcome_screen';
@@ -102,7 +101,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      ElevatedButton(onPressed: () async{
+                      ElevatedButton(onPressed: () {
                         login().then((value) => userData());
                         clearText();
                         // Timer(Duration(seconds: 3), () {
