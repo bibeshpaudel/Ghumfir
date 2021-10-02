@@ -165,7 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> register() async {
       var response = await http.post(
           Uri.parse(
-              "http://ghumfir002.pythonanywhere.com/api/auth/register/"),
+              "http://ghumfir003.pythonanywhere.com/api/auth/register/"),
           body: ({
             "username": userid.text,
             "email": email.text,

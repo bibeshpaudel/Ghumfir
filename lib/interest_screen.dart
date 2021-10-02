@@ -210,7 +210,7 @@ class _InterestScreenState extends State<InterestScreen> {
     var counter = prefs.getString('key') ?? 0;
     var counter1 = prefs.getInt('pk') ?? 0;
     var response = await http.post(
-      Uri.parse('http://ghumfir002.pythonanywhere.com/api/interest/'),
+      Uri.parse('http://ghumfir003.pythonanywhere.com/api/interest/'),
       body: jsonEncode({
         'location':location,
         'smoking':smoke,
@@ -227,5 +227,31 @@ class _InterestScreenState extends State<InterestScreen> {
       },);
     print(response.body);
     print(response.statusCode);
+    var response1 = await http.patch(
+      Uri.parse('http://ghumfir003.pythonanywhere.com/api/interest/$counter1/'),
+      body: jsonEncode({
+        'location':location,
+        'smoking':smoke,
+        'drinking':drink,
+        'party':party,
+        'driving':drive,
+        'musical':music,
+      }),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': '*/*',
+        'Authorization': 'Token $counter',
+      },);
+    print(response1.body);
+    print(response1.statusCode);
+    if(response1.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Interest Submitted')));
+      Navigator.pop(context);
+    }
+    else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Cannot Submit Interest")));
+    }
   }
 }

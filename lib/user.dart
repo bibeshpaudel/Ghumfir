@@ -6,7 +6,7 @@ Future userData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var counter = prefs.getString('key') ?? 0;
   var response = await http.get(
-    Uri.parse('http://ghumfir002.pythonanywhere.com/api/auth/user/'),
+    Uri.parse('http://ghumfir003.pythonanywhere.com/api/auth/user/'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Accept': '*/*',

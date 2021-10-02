@@ -5,9 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-// import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:http_parser/http_parser.dart';
 
 class FirstScreen extends StatefulWidget {
   static const id = 'first_screen';
@@ -44,72 +42,30 @@ class _FirstScreenState extends State<FirstScreen> {
     final XFile? selectedImageU =
     await _picker.pickImage(source: ImageSource.gallery, imageQuality: 10);
     print(selectedImageU!.path.toString());
-    //if(selectedImageU.path.isNotEmpty) {
       setState(() {
         usr = selectedImageU;
         userimage = File(selectedImageU.path);
         imageu = Image.file(File(selectedImageU.path));
         print(userimage!.path);
-        // String img64 = base64Encode(File(selectedImageU.path).readAsBytesSync());
-        // imgu = img64;
         List<int> imageBytes = (File(selectedImageU.path)).readAsBytesSync();
         String base64Image = base64.encode(imageBytes);
         imgu = base64Image;
       });
-    //}
   }
 
   void imageSelectC() async{
     final XFile? selectedImageC =
     await _picker.pickImage(source: ImageSource.gallery, imageQuality: 10);
     print(selectedImageC!.path.toString());
-    //if(selectedImageC.path.isNotEmpty) {
       setState(() {
         cer = selectedImageC;
         docimage = File(selectedImageC.path);
         imagec = Image.file(File(selectedImageC.path));
-        // String img64 = base64Encode(File(selectedImageC.path).readAsBytesSync());
-        // imgc = img64;
         List<int> imageBytes = (File(selectedImageC.path)).readAsBytesSync();
         String base64Image = base64.encode(imageBytes);
         imgc = base64Image;
       });
-    //}
   }
-
-  // Dio dio = new Dio();
-  // Future submitKYC() async{
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var counter = prefs.getString('key') ?? 0;
-  //   var counter1 = prefs.getInt('pk') ?? 0;
-  //   FormData? formData = FormData.fromMap({
-  //     "user": counter1,
-  //     "mobile":mobile,
-  //     "dob": dob,
-  //     "gender": gender,
-  //     "father_name":father,
-  //     "mother_name":mother,
-  //     "current_location":taddress,
-  //     "permanent_location":paddress,
-  //     "education":education,
-  //     "occupation":occupation,
-  //     "citizenship_number":cnumber,
-  //     "citizenship_issue_district":iaddress,
-  //     "citizenship_issue_date": doi,
-  //     "citizenship_photo": await MultipartFile.fromFile(userimage!.path, filename: 'citizen',),
-  //     "pp_size": await MultipartFile.fromFile(docimage!.path,  filename: 'user'),
-  //   });
-  //   var response = await dio.patch('http://ghumfir002.pythonanywhere.com/api/kyc/$counter1/',
-  //   data: formData,
-  //     options: Options(
-  //       headers: <String, String>{
-  //         'Authorization': 'Token $counter',
-  //       },
-  //     ),
-  //   );
-  //   print(response.statusCode);
-  //   print(response.data);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -138,20 +94,6 @@ class _FirstScreenState extends State<FirstScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: <Widget> [
-                // TextFormField(
-                // decoration: new InputDecoration(
-                //   prefixIcon: Icon(Icons.perm_identity),
-                //   labelText: "Full Name",
-                //   fillColor: Colors.white,
-                //   border: new OutlineInputBorder(
-                //     borderRadius: new BorderRadius.circular(25.0),
-                //     borderSide: new BorderSide(),
-                //   ),
-                // ),
-                // ),
-                //     SizedBox(
-                //       height: 10.0,
-                //     ),
                     DateTimeField(
                       controller: dob,
                       decoration: InputDecoration(
@@ -426,7 +368,7 @@ class _FirstScreenState extends State<FirstScreen> {
     var counter = prefs.getString('key') ?? 0;
      var counter1 = prefs.getInt('pk') ?? 0;
     var request = http.MultipartRequest(
-      'POST', Uri.parse("http://ghumfir002.pythonanywhere.com/api/kyc/"),
+      'POST', Uri.parse("http://ghumfir003.pythonanywhere.com/api/kyc/"),
 
     );
     Map<String,String> headers={
@@ -465,6 +407,13 @@ class _FirstScreenState extends State<FirstScreen> {
     var response = await request.send();
     print("This is response:"+response.toString());
     print(response.statusCode);
+    if(response.statusCode == 201) {
+      Navigator.pop(context);
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Invalid Credentials')));
+    }
     return response.statusCode;
   }
 }
