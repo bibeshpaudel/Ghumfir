@@ -21,6 +21,7 @@ String? idistrict;
 String? idate;
 String? pp;
 String? cpp;
+String? verified;
 
 
 
@@ -52,6 +53,7 @@ Future getKYC() async{
   idate = decodeData['citizenship_issue_date'].toString();
   pp = decodeData['pp_size'].toString();
   cpp = decodeData['citizenship_photo'].toString();
+  verified = decodeData['is_verified'].toString();
 
   if(response.statusCode == 200) {
    await navigatorKey.currentState!.pushNamed(KycScreen.id);

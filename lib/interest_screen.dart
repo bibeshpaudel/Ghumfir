@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 class InterestScreen extends StatefulWidget {
   static const id = 'interest_screen';
@@ -20,6 +20,25 @@ class _InterestScreenState extends State<InterestScreen> {
   bool? smoke = false;
   bool? drink = false;
   bool? drive = false;
+
+  final List<Map<String, dynamic>> _items = [
+    {
+      'value': 'ACT',
+      'label': 'Annapurna',
+    },
+    {
+      'value': 'MHT',
+      'label': 'Mardi',
+    },
+    {
+      'value': 'PKR',
+      'label': 'Pokhara',
+    },
+    {
+      'value': 'SRHA',
+      'label': 'Sauraha',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -48,25 +67,13 @@ class _InterestScreenState extends State<InterestScreen> {
             padding: const EdgeInsets.all(25.0),
             child: Column(
               children: <Widget>[
-                DropdownButtonFormField(
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.group),
-                        border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
-                          borderSide: new BorderSide(),
-                        ),
-                        labelText: 'Location'),
-                    value: location,
-                    items: ["ACT", "MHT","PKR","SRHA"]
-                        .map((label) => DropdownMenuItem(
-                      child: Text(label),
-                      value: label,
-                    ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() => location = value);
-                    },
-                  ),
+            SelectFormField(
+            type: SelectFormFieldType.dropdown,
+              icon: Icon(Icons.location_on),
+              labelText: 'Location',
+              items: _items,
+              onChanged: (val) => setState(() => location = val),
+            ),
                 SizedBox(
                   height: 10.0,
                 ),

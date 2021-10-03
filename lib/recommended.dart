@@ -23,7 +23,7 @@ class _RecommendedState extends State<Recommended> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      height: 200.0,
+                      height: 210.0,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           color: Colors.black12,
@@ -32,13 +32,21 @@ class _RecommendedState extends State<Recommended> {
                       child: Column(
                         children: <Widget>[
                           CircleAvatar(
-                            backgroundImage: AssetImage('images/avatar.png'),
-                            foregroundImage: pp1 == 'null' ? NetworkImage('http://ghumfir003.pythonanywhere.com/static/images/logo.png') :NetworkImage('http://ghumfir003.pythonanywhere.com$pp1'),
+                            // backgroundImage: AssetImage('images/avatar.png'),
+                            foregroundImage: NetworkImage('http://ghumfir003.pythonanywhere.com$pp1'),
+                            backgroundColor: pp1 == 'null' ? Colors.black26 : Colors.transparent,
                             radius: 65.0,
                           ),
-                          match1firstname == 'null' ? Text('No User') : Text('User: $match1firstname $match1lastname'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              match1firstname == 'null' ? Text('No User') : Text('User: $match1firstname $match1lastname',style: TextStyle(fontWeight: FontWeight.bold),),
+                              match1kyc == 'true' ? Icon(Icons.verified, color: Colors.blue,) : Text(''),
+                            ],
+                          ),
                           ElevatedButton(onPressed: () async{
                             mypreference1();
+                            Navigator.pop(context);
                           }, child: Text('Interested'),),
                         ],
                       ),
@@ -47,7 +55,7 @@ class _RecommendedState extends State<Recommended> {
                       height: 20.0,
                     ),
                     Container(
-                      height: 200.0,
+                      height: 210.0,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           color: Colors.black12,
@@ -56,14 +64,21 @@ class _RecommendedState extends State<Recommended> {
                       child: Column(
                         children: <Widget>[
                           CircleAvatar(
-                            backgroundImage: AssetImage('images/avatar.png'),
-                            // foregroundImage: NetworkImage('http://ghumfir003.pythonanywhere.com$pp2'),
-                            foregroundImage: pp2 == 'null' ? NetworkImage('http://ghumfir003.pythonanywhere.com/static/images/logo.png') :NetworkImage('http://ghumfir003.pythonanywhere.com$pp2'),
+                            // backgroundImage: AssetImage('images/avatar.png'),
+                            backgroundImage: NetworkImage('http://ghumfir003.pythonanywhere.com$pp2'),
+                            backgroundColor: pp2 == 'null' ? Colors.black26 : Colors.transparent,
                             radius: 65.0,
                           ),
-                          match2firstname == 'null' ? Text('No User') : Text('User: $match2firstname $match2lastname'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              match2firstname == 'null' ? Text('No User') : Text('User: $match2firstname $match2lastname',style: TextStyle(fontWeight: FontWeight.bold),),
+                              match2kyc == 'true' ? Icon(Icons.verified, color: Colors.blue,) : Text(''),
+                            ],
+                          ),
                           ElevatedButton(onPressed: () {
                             mypreference2();
+                            Navigator.pop(context);
                           }, child: Text('Interested'),),
                         ],
                       ),
@@ -72,7 +87,7 @@ class _RecommendedState extends State<Recommended> {
                       height: 20.0,
                     ),
                     Container(
-                      height: 200.0,
+                      height: 210.0,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           color: Colors.black12,
@@ -81,15 +96,22 @@ class _RecommendedState extends State<Recommended> {
                       child: Column(
                         children: <Widget>[
                           CircleAvatar(
-                            backgroundImage: AssetImage('images/avatar.png'),
-                            // foregroundImage: NetworkImage('http://ghumfir003.pythonanywhere.com$pp3'),
+                            // backgroundImage: AssetImage('images/avatar.png'),
+                            foregroundImage: NetworkImage('http://ghumfir003.pythonanywhere.com$pp3'),
+                            backgroundColor: pp3 == 'null' ? Colors.black26 : Colors.transparent,
                             radius: 65.0,
                           ),
-                          match3firstname == 'null' ? Text('No User') : Text('User: $match3firstname $match3lastname'),
-                          // Text('User: $match3firstname $match3lastname'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              match3firstname == 'null' ? Text('No User') : Text('User: $match3firstname $match3lastname',style: TextStyle(fontWeight: FontWeight.bold),),
+                              match3kyc == 'true' ? Icon(Icons.verified, color: Colors.blue,) : Text(''),
+                            ],
+                          ),
                           ElevatedButton(
                             onPressed: () {
                             mypreference3();
+                            Navigator.pop(context);
                           }, child: Text('Interested'),
                           ),
                         ],

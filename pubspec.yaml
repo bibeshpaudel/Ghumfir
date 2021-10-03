@@ -19,7 +19,8 @@ dependencies:
   datetime_picker_formfield: 2.0.0
   image_picker: 0.8.3+1
   carousel_slider: ^4.0.0
-  dio: ^4.0.0
+  select_form_field: ^2.2.0
+  font_awesome_flutter: ^9.1.0
 
 dev_dependencies:
   flutter_test:

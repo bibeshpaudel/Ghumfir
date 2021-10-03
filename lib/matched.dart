@@ -25,6 +25,7 @@ String? match3firstname;
 String? match3lastname;
 String? match3email;
 String? match3kyc;
+String? pp3;
 
 Future getMatchurl1() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -46,12 +47,17 @@ Future getMatchurl1() async {
   match1firstname = decodeData['first_name'].toString();
   match1lastname = decodeData['last_name'].toString();
   match1email = decodeData['email'].toString();
-  match1kyc = decodeData['kyc_url'].toString();
   try {
     pp1 = decodeData['pp_info'][0]['pp_size'].toString();
   }
   catch (e) {
-    pp1 = '/static/images/logo.png';
+    pp1 = 'null';
+  }
+  try {
+    match1kyc = decodeData['pp_info'][0]['is_verified'].toString();
+  }
+  catch (e) {
+    match1kyc = 'false';
   }
 }
 
@@ -75,12 +81,17 @@ Future getMatchurl2() async {
   match2firstname = decodeData['first_name'].toString();
   match2lastname = decodeData['last_name'].toString();
   match2email = decodeData['email'].toString();
-  match2kyc = decodeData['kyc_url'].toString();
   try {
     pp2 = decodeData['pp_info'][0]['pp_size'].toString();
   }
   catch (e) {
-    pp2 = '/images/logo.png';
+    pp2 = 'null';
+  }
+  try {
+    match2kyc = decodeData['pp_info'][0]['is_verified'].toString();
+  }
+  catch (e) {
+    match2kyc = 'false';
   }
 }
 
@@ -104,6 +115,17 @@ Future getMatchurl3() async {
   match3firstname = decodeData['first_name'].toString();
   match3lastname = decodeData['last_name'].toString();
   match3email = decodeData['email'].toString();
-  match3kyc = decodeData['kyc_url'].toString();
+  try {
+    pp3 = decodeData['pp_info'][0]['pp_size'].toString();
+  }
+  catch (e) {
+    pp3 = 'null';
+  }
+  try {
+    match3kyc = decodeData['pp_info'][0]['is_verified'].toString();
+  }
+  catch (e) {
+    match3kyc = 'false';
+  }
 }
 

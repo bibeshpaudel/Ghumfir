@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 class FirstScreen extends StatefulWidget {
   static const id = 'first_screen';
@@ -37,6 +38,36 @@ class _FirstScreenState extends State<FirstScreen> {
   XFile? cer;
   String? imgu;
   String? imgc;
+
+  final List<Map<String, dynamic>> _items = [
+    {
+      'value': 'M',
+      'label': 'Male',
+    },
+    {
+      'value': 'F',
+      'label': 'Female',
+    },
+  ];
+
+  final List<Map<String, dynamic>> _items1 = [
+    {
+      'value': 'B',
+      'label': 'Bachelor',
+    },
+    {
+      'value': 'M',
+      'label': 'Masters',
+    },
+    {
+      'value': '+2',
+      'label': '+2',
+    },
+    {
+      'value': 'S',
+      'label': 'up to SEE',
+    },
+  ];
 
   void imageSelectU() async{
     final XFile? selectedImageU =
@@ -161,48 +192,22 @@ class _FirstScreenState extends State<FirstScreen> {
                     SizedBox(
                       height: 10.0,
                     ),
-                    DropdownButtonFormField(
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.group),
-                          border: OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: new BorderSide(),
-                          ),
-                          labelText: 'Gender'),
-                      hint: Text('Gender'),
-                      value: gender,
-                      items: ["M", "F"]
-                          .map((label) => DropdownMenuItem(
-                        child: Text(label),
-                        value: label,
-                      ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() => gender = value);
-                      },
+                    SelectFormField(
+                      type: SelectFormFieldType.dropdown,
+                      icon: Icon(Icons.group),
+                      labelText: 'Gender',
+                      items: _items,
+                      onChanged: (val) => setState(() => gender = val),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    DropdownButtonFormField(
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.menu_book_outlined),
-                          border: OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: new BorderSide(),
-                          ),
-                          labelText: 'Education'),
-                      hint: Text('Education'),
-                      value: education,
-                      items: ["M", "B", "+2", "S"]
-                          .map((label) => DropdownMenuItem(
-                        child: Text(label),
-                        value: label,
-                      ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() => education = value);
-                      },
+                    SelectFormField(
+                      type: SelectFormFieldType.dropdown,
+                      icon: Icon(Icons.menu_book_outlined),
+                      labelText: 'Education',
+                      items: _items1,
+                      onChanged: (val) => setState(() => education = val),
                     ),
                     SizedBox(
                       height: 10.0,

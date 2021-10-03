@@ -8,7 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart' as http;
 import 'package:ghumfir/getKYC.dart';
 import 'package:ghumfir/interesteduser.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'match.dart';
 import 'matched.dart';
 
@@ -67,13 +67,8 @@ import 'matched.dart';
            automaticallyImplyLeading: false,
          actions: [
            PopupMenuButton<int>(
-             icon: Icon(Icons.perm_identity_sharp),
-             iconSize: 50.0,
-             shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.all(
-                 Radius.circular(20.0),
-               ),
-             ),
+             icon: FaIcon(FontAwesomeIcons.userCircle),
+             iconSize: 40.0,
              onSelected: (item) => onSelected(context, item),
              itemBuilder: (context) => [
              PopupMenuItem<int>(
@@ -122,16 +117,22 @@ import 'matched.dart';
                              decoration: BoxDecoration(
                                borderRadius: BorderRadius.circular(10.0),
                                image: DecorationImage(
-                                 image: AssetImage('images/Pokhara.png'),
+                                 image: AssetImage('images/pokhara.jpg'),
                                  fit: BoxFit.cover,
                                ),
                              ),
-                             child: Align(
-                               alignment: Alignment.center,
-                               child: Text('POKHARA',
-                                 style: TextStyle(color: Colors.white, fontSize: 30.0,
-                                 ),
-                               ),
+                           ),
+                         ),
+                       ),
+                       SizedBox(
+                         width: double.infinity,
+                         child: Container(
+                           margin: EdgeInsets.symmetric(vertical: 5.0),
+                           decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(10.0),
+                             image: DecorationImage(
+                               image: AssetImage('images/mardi.jpg'),
+                               fit: BoxFit.cover,
                              ),
                            ),
                          ),
@@ -143,14 +144,8 @@ import 'matched.dart';
                            decoration: BoxDecoration(
                              borderRadius: BorderRadius.circular(10.0),
                              image: DecorationImage(
-                               image: AssetImage('images/mardi.png'),
+                               image: AssetImage('images/sauraha.jpg'),
                                fit: BoxFit.cover,
-                             ),
-                           ),
-                           child: Align(
-                             alignment: Alignment.center,
-                             child: Text('MARDI',
-                               style: TextStyle(color: Colors.white, fontSize: 30.0),
                              ),
                            ),
                          ),
@@ -162,33 +157,8 @@ import 'matched.dart';
                            decoration: BoxDecoration(
                              borderRadius: BorderRadius.circular(10.0),
                              image: DecorationImage(
-                               image: AssetImage('images/sauraha.png'),
+                               image: AssetImage('images/annapurna.jpg'),
                                fit: BoxFit.cover,
-                             ),
-                           ),
-                           child: Align(
-                             alignment: Alignment.center,
-                             child: Text('SAURAHA',
-                               style: TextStyle(color: Colors.white, fontSize: 30.0),
-                             ),
-                           ),
-                         ),
-                       ),
-                       SizedBox(
-                         width: double.infinity,
-                         child: Container(
-                           margin: EdgeInsets.symmetric(vertical: 5.0),
-                           decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(10.0),
-                             image: DecorationImage(
-                               image: AssetImage('images/annapurna1.jpg'),
-                               fit: BoxFit.cover,
-                             ),
-                           ),
-                           child: Align(
-                             alignment: Alignment.center,
-                             child: Text('ANNAPURNA',
-                             style: TextStyle(color: Colors.white, fontSize: 30.0),
                              ),
                            ),
                          ),
@@ -260,7 +230,7 @@ import 'matched.dart';
                height: 80.0,
                child: ElevatedButton(
                  onPressed: () {
-                     getinterested().then((value) => finalinterested()).then((value) => Navigator.pushNamed(context, InterestedUser.id));
+                     getinterested().then((value) => finalinterested()).then((value) => finalinterested2().then((value) => finalinterested3().then((value) => Navigator.pushNamed(context, InterestedUser.id))));
 
                  }, child: Text("Interested User's"),
                  style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
