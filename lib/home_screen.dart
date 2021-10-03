@@ -64,9 +64,15 @@ import 'matched.dart';
                color: Colors.black, fontSize: 25.0,
            ),
          ),
+           backgroundColor: Color(0xF5F5F5),
            automaticallyImplyLeading: false,
          actions: [
            PopupMenuButton<int>(
+             shape: RoundedRectangleBorder(
+             borderRadius: BorderRadius.all(
+             Radius.circular(20.0),
+       ),
+     ),
              icon: FaIcon(FontAwesomeIcons.userCircle),
              iconSize: 40.0,
              onSelected: (item) => onSelected(context, item),
@@ -249,10 +255,10 @@ import 'matched.dart';
              ),
            ),
                      SizedBox(
-                       height: 20.0,
+                       height: 30.0,
                      ),
                      Text('Powered by',style: TextStyle(fontSize: 30.0, color: Colors.black.withOpacity(0.3), fontStyle: FontStyle.italic),),
-                     Text('Ghumfir..',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.3),fontFamily: 'Pacifico'),),
+                     Text('Zettaminds',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.3),fontFamily: 'Pacifico'),),
                    ],
                  ),
                ),

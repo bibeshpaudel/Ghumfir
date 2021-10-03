@@ -182,7 +182,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         setState(() {
           prefs.setString("key", decodeData['key']);
+          prefs.setString("username", userid.text);
         });
+        if(response.statusCode == 201) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('User Registered')));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Invalid Credentials')));
+        }
       }
   }
     }

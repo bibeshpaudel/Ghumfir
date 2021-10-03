@@ -155,6 +155,7 @@ Future login() async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           setState(() {
             prefs.setString("key", decodeData['key']);
+            prefs.setString('username', userid.text);
           });
           Navigator.pushNamed(context, HomeScreen.id);
         }
