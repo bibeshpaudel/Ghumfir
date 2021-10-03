@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -101,17 +102,6 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(30.0),
-        child: AppBar(
-          backgroundColor: Colors.cyanAccent,
-          title: Text('KYC Form', style: TextStyle(
-            color: Colors.black,
-          ),),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-        ),
-      ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -125,6 +115,16 @@ class _FirstScreenState extends State<FirstScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: <Widget> [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.format_align_justify),
+                        Text('KYC FORM',style: TextStyle(fontStyle: FontStyle.italic, fontSize: 30.0,decoration: TextDecoration.underline),),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     DateTimeField(
                       controller: dob,
                       decoration: InputDecoration(
@@ -414,6 +414,8 @@ class _FirstScreenState extends State<FirstScreen> {
     print(response.statusCode);
     if(response.statusCode == 201) {
       Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('KYC Submitted')));
     }
     else{
       ScaffoldMessenger.of(context).showSnackBar(

@@ -61,7 +61,7 @@ import 'matched.dart';
        child: Scaffold(
          appBar: AppBar(title: Text('Ghumfir',
            style: TextStyle(fontFamily: 'Pacifico',
-               color: Colors.black
+               color: Colors.black, fontSize: 25.0,
            ),
          ),
            automaticallyImplyLeading: false,
@@ -175,50 +175,55 @@ import 'matched.dart';
                      SizedBox(
                        height: 20.0,
                      ),
-                     Padding(
-                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                       child: SizedBox(
-                         width: double.infinity,
-                         height: 80.0,
-                         child: ElevatedButton(
-                           onPressed: () {
-                             Navigator.pushNamed(context, InterestScreen.id);
-                           }, child: Text('Interest'),
-                           style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                             RoundedRectangleBorder(
-                               borderRadius: BorderRadius.circular(18.0),
+                     Row(
+                       children: <Widget>[
+                         Expanded(
+                           flex: 1,
+                           child: Padding(
+                             padding: const EdgeInsets.all(10.0),
+                             child: SizedBox(
+                               height: 120.0,
+                               child: ElevatedButton(
+                                 onPressed: () {
+                                   Navigator.pushNamed(context, InterestScreen.id);
+                                 }, child: Text('Interest',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 30.0,fontWeight: FontWeight.bold),),
+                                 style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                   RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.circular(18.0),
+                                   ),
+                                 ),
+                                   backgroundColor: MaterialStateProperty.all(Colors.deepOrangeAccent[200]),
+                                 ),
+                               ),
                              ),
                            ),
-                             backgroundColor: MaterialStateProperty.all(Colors.lightGreen),
-                           ),
                          ),
-                       ),
-                     ),
-                     SizedBox(
-                       height: 20.0,
-                     ),
-                     Padding(
-                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                       child: SizedBox(
-                         width: double.infinity,
-                         height: 80.0,
-                         child: ElevatedButton(
-                           onPressed: () async{
-                             await getMatch();
-                             await getMatchurl1();
-                             await getMatchurl2();
-                             await getMatchurl3();
-                             await Navigator.pushNamed(context, Recommended.id);
-                           }, child: Text('Match'),
-                           style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                             RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(18.0),
+                         Expanded(
+                           flex: 1,
+                           child: Padding(
+                             padding: const EdgeInsets.all(10.0),
+                             child: SizedBox(
+                               height: 120.0,
+                               child: ElevatedButton(
+                                 onPressed: () async{
+                                   await getMatch();
+                                   await getMatchurl1();
+                                   await getMatchurl2();
+                                   await getMatchurl3();
+                                   await Navigator.pushNamed(context, Recommended.id);
+                                 }, child: Text('Match',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 30.0,fontWeight: FontWeight.bold),),
+                                 style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                   RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.circular(18.0),
+                                   ),
+                                 ),
+                                   backgroundColor: MaterialStateProperty.all(Colors.lightGreen[400]),
+                                 ),
+                               ),
                              ),
                            ),
-                             backgroundColor: MaterialStateProperty.all(Colors.lightGreen),
-                           ),
                          ),
-                       ),
+                       ],
                      ),
                      SizedBox(
                        height: 20.0,
@@ -232,17 +237,22 @@ import 'matched.dart';
                  onPressed: () {
                      getinterested().then((value) => finalinterested()).then((value) => finalinterested2().then((value) => finalinterested3().then((value) => Navigator.pushNamed(context, InterestedUser.id))));
 
-                 }, child: Text("Interested User's"),
+                 }, child: Text("Interested User's",style: TextStyle(fontStyle: FontStyle.italic,fontSize: 25.0,fontWeight: FontWeight.bold),),
                  style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                    RoundedRectangleBorder(
                      borderRadius: BorderRadius.circular(18.0),
                    ),
                  ),
-                   backgroundColor: MaterialStateProperty.all(Colors.lightGreen),
+                   backgroundColor: MaterialStateProperty.all(Colors.deepPurple[300]),
                  ),
                ),
              ),
            ),
+                     SizedBox(
+                       height: 20.0,
+                     ),
+                     Text('Powered by',style: TextStyle(fontSize: 30.0, color: Colors.black.withOpacity(0.3), fontStyle: FontStyle.italic),),
+                     Text('Ghumfir..',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.3),fontFamily: 'Pacifico'),),
                    ],
                  ),
                ),

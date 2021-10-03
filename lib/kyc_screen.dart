@@ -12,18 +12,6 @@ class _KycScreenState extends State<KycScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(30.0),
-        child: AppBar(
-          backgroundColor: Colors.amber,
-          title: Text('Your KYC', style: TextStyle(
-            fontFamily: 'Pacifico',
-            color: Colors.black,
-          ),),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-        ),
-      ),
       body: Container(
         child: SingleChildScrollView(
         child: SafeArea(
@@ -32,6 +20,16 @@ class _KycScreenState extends State<KycScreen> {
               padding: const EdgeInsets.all(25.0),
               child: Column(
                 children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.format_align_justify),
+                      Text('KYC FORM',style: TextStyle(fontStyle: FontStyle.italic, fontSize: 30.0,decoration: TextDecoration.underline),),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   verified == 'true' ? Row(children: <Widget>[Icon(Icons.verified_user, color: Colors.green,),
                   Text('Verified',style: TextStyle(fontSize: 18.0),)],) : Row(children: <Widget>[Icon(Icons.verified_user, color: Colors.red,),
                     Text('Not Verified',style: TextStyle(fontSize: 18.0),)],),
@@ -134,20 +132,6 @@ class _KycScreenState extends State<KycScreen> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  // SizedBox(
-                  //   width: double.infinity,
-                  //   height: 50.0,
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       color: Colors.lightGreen,
-                  //       borderRadius: BorderRadius.circular(10.0),
-                  //     ),
-                  //     child: Center(child: Text('Education: $education',
-                  //       style: TextStyle(fontSize: 18.0),)),
-                  //   ),),
-                  // SizedBox(
-                  //   height: 10.0,
-                  // ),
                   SizedBox(
                     width: double.infinity,
                     height: 50.0,
